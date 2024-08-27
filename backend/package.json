@@ -4,16 +4,22 @@
   "description": "backend for who's that pokemon",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node-dev src/server.ts"
   },
   "author": "ciaran",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
     "axios": "^1.7.5",
     "cors": "^2.8.5",
     "express": "^4.19.2"
   },
   "devDependencies": {
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.4"
   }
 }
