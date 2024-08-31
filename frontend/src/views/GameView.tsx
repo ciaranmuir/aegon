@@ -12,7 +12,7 @@ interface GameViewProps {
 const GameView = (props: GameViewProps) => {
     //set up query to backend to get random pokemon
     const { getRandomPokemon, verifyPokemon, error, loading} = usePokeAPI()
-    const [pokemon, setPokemon] = useState<Pokemon | undefined>(undefined)
+    const [pokemon, setPokemon] = useState<PokemonHidden | undefined>(undefined)
     const [options, setOptions] = useState<string[]>(['?', '?', '?', '?'])
 
     // handleSetUp queries the backend to get a new pokemon and set the options
@@ -30,9 +30,15 @@ const GameView = (props: GameViewProps) => {
 
     // handlerGuess queries the backend to verify the guess
     const handlerGuess = (guess: string) => {
-        console.log('guess', guess)
         queryVerifyPokemon(pokemon?.id ?? '', guess).then((resp) => {
-            if (resp) {
+            // cannot work out why resp is being double wrapped in data obj
+            if (resp.data.data) {
+                console.log('resp', resp.data)
+                if (resp.data.data.isCorrect) {
+                    props.setScore({...props.score, correct: props.score.correct + 1})
+                } else {
+                    props.setScore({...props.score, incorrect: props.score.incorrect + 1})
+                }
                 handleSetUp()
             } else if (error) {
                 console.log('error', error)

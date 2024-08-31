@@ -8,6 +8,22 @@
     @apply p-10 bg-gradient-to-br from-indigo-700 to-red-500 text-white text-center min-h-[100vh] max-h-[100vh] w-[100vw]
 }
 
+#score-board {
+    @apply absolute left-[50%] translate-x-[-50%] opacity-75 top-4 bg-blue-700 border-2 rounded-lg border-yellow-500 py-1 px-3 text-yellow-300 font-bold text-lg font-mono
+}
+
+@media (max-width: 1024px) {
+    #score-board {
+        @apply text-base top-2;
+    }
+}
+
+@media (max-width: 640px) {
+    #score-board {
+        @apply text-xs top-2;
+    }
+}
+
 /* Buttons */
 .poke-menu-button {
     @apply bg-blue-700 border-4 border-yellow-500 text-yellow-300 font-bold p-4 text-lg font-mono rounded-lg hover:bg-blue-800;

@@ -4,6 +4,7 @@ import './index.css'
 import axios from "axios";
 import GameView from "./views/GameView";
 import StartMenuView from "./views/StartMenuView";
+import Header from "./components/Headers/Header";
 
 export const pokeClient = axios.create({
     baseURL: 'http://localhost:3000/api/pokemon/',
@@ -11,22 +12,19 @@ export const pokeClient = axios.create({
 })
 export interface UserScore {
     correct: number,
-    incorrect: number,
-    totalGuess: number
+    incorrect: number
 }
 const App = () => {
     const [gameStarted, setGameStarted] = useState<boolean>(false)
-    const [score, setScore] = useState<UserScore>({ correct: 0, incorrect: 0, totalGuess: 0 })
+    const [score, setScore] = useState<UserScore>({ correct: 0, incorrect: 0 })
+
     return (
         <div id={'main-view'}>
-            <div className={'flex justify-center h-[10%] max-h-[10%] bg-black-300'}>
-                <img className={'mx-auto mt-[2%]'} src={"./svgs/logos/logo-classic.svg"} alt="Logo" />
-            </div>
-
+            <Header score={score}/>
             <div className={'flex justify-center w-full h-[90%] max-h-[90%] bg-black-300'}>
                 { gameStarted ?
                     <StartMenuView setGameStarted={setGameStarted}/> :
-                    <GameView/>
+                    <GameView score={score} setScore={setScore}/>
                 }
             </div>
         </div>
