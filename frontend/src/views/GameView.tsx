@@ -69,7 +69,7 @@ const GameView = (props: GameViewProps) => {
                     <img className={`poke-image`} src={pokemonHidden?.silhouette} alt="Pokemon" />
                 ) : (
                     <>
-                        <img className={'poke-image'} src={pokemonRevealed.imgURL} alt="Pokemon" />
+                        <img className={'poke-image-reveal'} src={pokemonRevealed.imgURL} alt="Pokemon" />
                         <p>{pokemonRevealed.name}</p>
                     </>
                 )}

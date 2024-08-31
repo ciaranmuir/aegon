@@ -125,7 +125,6 @@ p {
     }
 }
 
-
 /* Containers */
 .button-panel-container {
     @apply flex flex-col w-[60%] place-self-center;
@@ -153,12 +152,26 @@ p {
 }
 
 .poke-image {
-    @apply mx-auto poke-pulse h-40;
+    @apply mx-auto h-64;
+}
+
+@media (max-width: 640px) {
+    .poke-image {
+        @apply h-32;
+    }
+}
+
+.poke-image-reveal {
+    @apply poke-image poke-reveal;
 }
 
 /* Animations */
 .poke-pulse {
     animation: pulseBrightness 3s infinite ease-in-out;
+}
+
+.poke-reveal {
+    animation: reveal 300ms ease-in-out;
 }
 
 @keyframes pulseBrightness {
@@ -170,6 +183,15 @@ p {
     }
     100% {
         filter: grayscale(100%) brightness(0.2);
+    }
+}
+
+@keyframes reveal {
+    0% {
+        filter: grayscale(100%) brightness(0.2);
+    }
+    100% {
+        filter: grayscale(0%) brightness(1.0);
     }
 }
 
