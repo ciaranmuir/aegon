@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import {pokeClient} from "../index";
-import {getRandomPokemon} from "../client/queries/queries";
 import {usePokeAPI} from "../hooks/usePokeAPI";
 import ButtonPanel from "../components/ButtonPanel/ButtonPanel";
 const GameView = () => {
