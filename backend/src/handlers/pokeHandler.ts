@@ -1,13 +1,13 @@
 import axios from 'axios';
 import {Pokemon, PokemonRandomResponse} from "../api/types";
-import {generateRandomExcluding} from "../utils/utils";
+import {createSilhouette, generateRandomExcluding} from "../utils/utils";
 import {pokeCache} from "../app";
 import {POKIAPI_URL} from "../consts";
 
 export const getRandomPokemon = async (): Promise<PokemonRandomResponse | string> => {
     try {
         let ids: number[] = []
-        let theChosenOne: Pokemon = {id: '', imgURL: ''}
+        let theChosenOne: Pokemon = {id: '', silhouette: ''}
         let nameOptions: string[] = []
 
         // generate random ids to pick 4 random pokemon
@@ -15,15 +15,20 @@ export const getRandomPokemon = async (): Promise<PokemonRandomResponse | string
             ids.push( generateRandomExcluding(1, 50, ids))
         }
 
-        // get the pokemon from the cache and populate response
+        // construct the chosenOne
+        let chosenOne = pokeCache.get(ids[0].toString())
+        if (!chosenOne) {
+            throw new Error('Pokemon not found')
+        }
+        theChosenOne.id = chosenOne.id
+        let silhouetteBuffer= await createSilhouette(chosenOne.imgURL)
+        theChosenOne.silhouette = `data:image/png;base64,${silhouetteBuffer.toString('base64')}`
+
+        // get the pokemon from the cache add name options
         ids.map((id, index) => {
             let p = pokeCache.get(id.toString())
             if (!p) {
                 throw new Error( 'Pokemon not found')
-            }
-            if (index === 0) {
-                theChosenOne.id = p.id
-                theChosenOne.imgURL = p.imgURL
             }
             nameOptions.push(p.name)
             return

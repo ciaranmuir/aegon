@@ -9,8 +9,8 @@ export async function fetchPokemon(pokeCache: Map<string, DBPokemon>): Promise<a
         for (let i = 1; i <= maxPokemon; i++) {
             const response = await axios.get(`${POKIAPI_URL}/${i}`)
             const pokemon = response.data
-            pokeCache.set(pokemon.name, {
-                id: pokemon.id,
+            pokeCache.set(pokemon.id.toString(), {
+                id: pokemon.id.toString(),
                 name: pokemon.name,
                 imgURL: pokemon.sprites.front_default
             })
@@ -20,16 +20,15 @@ export async function fetchPokemon(pokeCache: Map<string, DBPokemon>): Promise<a
     }
 }
 
-async function createSilhouette(imageURL: string): Promise<Buffer> {
+export async function createSilhouette(imageURL: string): Promise<Buffer> {
     const response = await axios.get(imageURL, { responseType: 'arraybuffer' });
     const buffer = Buffer.from(response.data, 'binary');
 
-    // Convert image to grayscale and adjust brightness and contrast to create a silhouette effect
     return await sharp(buffer)
         .grayscale()
         .modulate({
-            brightness: 0.4,  // Adjust brightness to darken the image
-            saturation: 0,    // Set saturation to 0 to remove any color
+            brightness: 0.4,
+            saturation: 0,
         })
         .toBuffer();
 }

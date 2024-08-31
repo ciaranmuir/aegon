@@ -1,7 +1,7 @@
 
 export interface Pokemon {
     id: string
-    imgURL: string
+    silhouette: string
 }
 
 export interface PokemonRandomResponse {
