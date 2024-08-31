@@ -11,7 +11,7 @@ const StartMenuView = (props: StartMenuViewProps) => {
      }
     return (
         <div className={'flex flex-col min-h-full max-h-full'}>
-            <img className={'mx-auto mt-[2%] h-[40%]'} src={"./svgs/suspense/gaming.svg"} alt="Logo" />
+            <img className={'mx-auto mt-[2%] poke-loading h-[40%]'} src={"./svgs/suspense/pokeball.svg"} alt="Logo" />
             <button className={'poke-menu-button mt-[10%]'} onClick={handleStartGame}>Start Game!</button>
         </div>
     )

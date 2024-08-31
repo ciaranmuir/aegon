@@ -27,7 +27,7 @@ export async function createSilhouette(imageURL: string): Promise<Buffer> {
     return await sharp(buffer)
         .grayscale()
         .modulate({
-            brightness: 0.4,
+            brightness: 0.0,
             saturation: 0,
         })
         .toBuffer();
