@@ -23,7 +23,7 @@ const App = () => {
             </div>
 
             <div className={'flex justify-center w-full h-[90%] max-h-[90%] bg-black-300'}>
-                { gameStarted ?
+                { !gameStarted ?
                     <StartMenuView setGameStarted={setGameStarted}/> :
                     <GameView/>
                 }

@@ -18,3 +18,9 @@ export async function fetchPokemon(pokeCache: Map<string, DBPokemon>): Promise<a
         console.log(error)
     }
 }
+
+// Generate a random number between min and max excluding the numbers in the exclude array
+export function generateRandomExcluding(min: number, max: number, exclude: number[]): number {
+    var num = Math.floor(Math.random() * (max - min + 1)) + min;
+    return exclude.includes(num) ? generateRandomExcluding(min, max, exclude) : num;
+}
