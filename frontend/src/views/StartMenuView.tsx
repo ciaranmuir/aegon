@@ -1,4 +1,5 @@
 import React, {Dispatch, SetStateAction} from 'react'
+import ButtonPanel from "../components/ButtonPanel/ButtonPanel";
 
 
 // define ts props
@@ -10,9 +11,13 @@ const StartMenuView = (props: StartMenuViewProps) => {
         props.setGameStarted(true)
      }
     return (
-        <div className={'flex flex-col'}>
-            <img className={'mx-auto mt-[2%] poke-pulse h-[40%]'} src={"./svgs/suspense/pokeball.svg"} alt="Logo" />
-            <button className={'poke-menu-button mt-[30%]'} onClick={handleStartGame}>Start Game!</button>
+        <div className={'game-view'}>
+            <div className={'poke-image-container'}>
+                <img className={'mx-auto poke-pulse h-[40%]'} src={"./imgs/loading/pokeball-spinner.svg"} alt="Logo" />
+            </div>
+            <div className={'button-panel-container'}>
+                <ButtonPanel options={['Start Game!']} onClick={handleStartGame} disabled={false}/>
+            </div>
         </div>
     )
 }

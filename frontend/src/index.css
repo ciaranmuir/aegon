@@ -4,8 +4,16 @@
 
 /* Custom CSS */
 
-#main-view {
-    @apply p-10 bg-gradient-to-br from-indigo-700 to-red-500 text-white text-center min-h-[100vh] max-h-[100vh] w-[100vw]
+#app-view {
+    @apply p-10 bg-gradient-to-br from-indigo-700 to-red-500 min-h-[100vh] max-h-[100vh] w-[100vw]
+}
+
+#app-header {
+    @apply flex justify-center h-[20vh] max-h-[20vh]
+}
+
+#app-body {
+    @apply flex justify-center w-full h-[80vh] max-h-[80vh]
 }
 
 #score-board {
@@ -24,62 +32,68 @@
     }
 }
 
-/* Buttons */
-.poke-menu-button {
-    @apply bg-blue-700 border-4 border-yellow-500 text-yellow-300 font-bold p-4 text-lg font-mono rounded-lg hover:bg-blue-800;
+/* Tags */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+}
+p {
+    @apply text-lg font-bold text-yellow-300 font-mono;
 }
 
+@media (max-width: 1024px) {
+    p {
+        @apply text-base;
+    }
+}
+
+@media (max-width: 640px) {
+    p {
+        @apply text-xs;
+    }
+}
+
+/* Buttons */
 .poke-button {
     @apply bg-blue-700 text-center border-4 border-yellow-500 text-yellow-300 font-bold p-4 text-lg font-mono rounded-lg hover:bg-blue-800;
 }
 
 @media (max-width: 1024px) {
     .poke-button {
-        @apply text-base p-2;
+        @apply text-base text-center p-2;
     }
 }
 
 @media (max-width: 640px) {
     .poke-button {
-        @apply text-xs p-2;
+        @apply text-xs text-center p-2;
     }
-}
-
-.button-panel-button {
-    @apply flex min-w-[10%] text-center disabled:bg-gray-700 disabled:text-gray-200 mt-[10%]
 }
 
 /* Views */
 .game-view {
-    @apply flex flex-col min-h-full gap-16 w-full max-h-full
+    @apply flex flex-col w-full h-full
 }
 
-@media (max-width: 1024px) {
-    .game-view {
-        @apply gap-8;
-    }
-}
-
-@media (max-width: 640px) {
-    .game-view {
-        @apply gap-4;
-    }
-}
 
 /* Components */
 .button-panel {
-    @apply flex flex-row justify-around
+    @apply flex flex-row justify-around w-full
 }
 
 @media (max-width: 1024px) {
     .button-panel {
-        @apply flex flex-col;
+        @apply flex flex-col gap-2;
+        justify-content: flex-start;
     }
 }
 
 @media (max-width: 640px) {
     .button-panel-container {
-        @apply flex flex-col;
+        @apply flex flex-col gap-2;
+        justify-content: flex-start;
     }
 }
 
@@ -101,6 +115,20 @@
     }
 }
 
+.poke-image-container {
+    @apply flex flex-col justify-center w-full h-[40%]
+}
+
+/* Images */
+.poke-ball-spinner {
+    @apply animate-spin;
+    filter: grayscale(100%) brightness(0.3);
+}
+
+.poke-image {
+    @apply mx-auto poke-pulse h-40;
+}
+
 /* Animations */
 .poke-pulse {
     animation: pulseBrightness 3s infinite ease-in-out;
@@ -116,4 +144,17 @@
     100% {
         filter: grayscale(100%) brightness(0.2);
     }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 700ms linear infinite;
 }

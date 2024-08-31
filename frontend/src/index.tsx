@@ -19,10 +19,10 @@ const App = () => {
     const [score, setScore] = useState<UserScore>({ correct: 0, incorrect: 0 })
 
     return (
-        <div id={'main-view'}>
+        <div id={'app-view'}>
             <Header score={score}/>
-            <div className={'flex justify-center w-full h-[90%] max-h-[90%] bg-black-300'}>
-                { gameStarted ?
+            <div id={'app-body'}>
+                { !gameStarted ?
                     <StartMenuView setGameStarted={setGameStarted}/> :
                     <GameView score={score} setScore={setScore}/>
                 }
