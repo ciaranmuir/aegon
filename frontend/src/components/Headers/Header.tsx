@@ -11,7 +11,7 @@ const Header = (props: HeaderProps) => {
             <div id={'score-board'}>
                 <p>Score: {props.score.correct}/{props.score.correct + props.score.incorrect}</p>
             </div>
-            <img className={'mx-auto mt-[2%]'} src={"./imgs/logos/logo-classic.svg"} alt="Logo" />
+            <img id={'header-img'} src={"./imgs/logos/logo-classic.svg"} alt="Logo" />
         </div>
     )
 }

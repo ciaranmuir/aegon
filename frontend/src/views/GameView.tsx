@@ -64,7 +64,7 @@ const GameView = (props: GameViewProps) => {
         <div className={'game-view'}>
             <div className={'poke-image-container text-center'}>
                 {loading ? (
-                    <img className="poke-image poke-ball-spinner" src={pokeloadingImg} alt="Loading" />
+                    <img className="poke-image silhouetted animate-spin" src={pokeloadingImg} alt="Loading" />
                 ) : !pokemonRevealed ? (
                     <img className={`poke-image`} src={pokemonHidden?.silhouette} alt="Pokemon" />
                 ) : (
@@ -76,7 +76,6 @@ const GameView = (props: GameViewProps) => {
             </div>
             {
                 !loading && pokemonHidden &&
-
                 <div className={'button-panel-container'} >
                     <ButtonPanel options={options} onClick={handlerGuess} disabled={loading}/>
                 </div>

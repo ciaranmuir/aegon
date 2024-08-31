@@ -20,6 +20,22 @@
     @apply absolute left-[50%] translate-x-[-50%] opacity-75 top-4 bg-blue-700 border-2 rounded-lg border-yellow-500 py-1 px-3 text-yellow-300 font-bold text-lg font-mono
 }
 
+#header-img {
+    @apply mx-auto mt-[2%]
+}
+
+@media (max-width: 1024px) {
+    #header-img {
+        @apply h-20 mt-12
+    }
+}
+
+@media (max-width: 640px) {
+    #header-img {
+        @apply h-12 mt-12
+    }
+}
+
 @media (max-width: 1024px) {
     #score-board {
         @apply text-base top-2;
@@ -74,7 +90,19 @@ p {
 
 /* Views */
 .game-view {
-    @apply flex flex-col w-full h-full
+    @apply flex flex-col gap-32 w-full h-full
+}
+
+@media (max-width: 1024px) {
+    .game-view {
+        @apply flex flex-col gap-16 w-full h-full
+    }
+}
+
+@media (max-width: 640px) {
+    .game-view {
+        @apply flex flex-col gap-8 w-full h-full
+    }
 }
 
 
@@ -120,9 +148,8 @@ p {
 }
 
 /* Images */
-.poke-ball-spinner {
-    @apply animate-spin;
-    filter: grayscale(100%) brightness(0.3);
+.silhouetted {
+    filter: grayscale(100%) brightness(0.2);
 }
 
 .poke-image {
