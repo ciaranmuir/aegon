@@ -1,12 +1,21 @@
-import React, {useEffect, useState} from 'react'
+import React, {Dispatch, SetStateAction, useEffect, useState} from 'react'
 import {usePokeAPI} from "../hooks/usePokeAPI";
 import ButtonPanel from "../components/ButtonPanel/ButtonPanel";
 import {queryVerifyPokemon} from "../client/queries/queries";
-const GameView = () => {
+import {UserScore} from "../index";
+
+interface GameViewProps {
+    score: UserScore
+    setScore: Dispatch<SetStateAction<UserScore>>
+}
+
+const GameView = (props: GameViewProps) => {
     //set up query to backend to get random pokemon
     const { getRandomPokemon, verifyPokemon, error, loading} = usePokeAPI()
     const [pokemon, setPokemon] = useState<Pokemon | undefined>(undefined)
     const [options, setOptions] = useState<string[]>(['?', '?', '?', '?'])
+
+    // handleSetUp queries the backend to get a new pokemon and set the options
     const handleSetUp = () => {
         getRandomPokemon().then((resp) => {
             if (resp) {
@@ -19,6 +28,7 @@ const GameView = () => {
         })
     }
 
+    // handlerGuess queries the backend to verify the guess
     const handlerGuess = (guess: string) => {
         console.log('guess', guess)
         queryVerifyPokemon(pokemon?.id ?? '', guess).then((resp) => {
@@ -35,7 +45,7 @@ const GameView = () => {
     },[])
 
     return (
-        <div className={'flex flex-col min-h-full gap-16 w-full max-h-full'}>
+        <div className={'game-view'}>
             {
                 loading ?
                     <div className={'flex flex-row justify-center'}>

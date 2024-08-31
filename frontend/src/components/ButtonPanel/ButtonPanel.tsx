@@ -12,11 +12,11 @@ const ButtonPanel = (props: ButtonPanelProps) => {
     }
 
     return (
-        <div className={'flex flex-row justify-around'}>
+        <div className={'button-panel'}>
             {props.options.map((option, index) => {
                 return (
                     <button
-                        className={`poke-button min-w-[10%] disabled:bg-gray-700 disabled:text-gray-200 mt-[10%]`}
+                        className={`poke-button button-panel-button`}
                         key={index}
                         id={option}
                         onClick={handleClick}

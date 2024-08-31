@@ -14,7 +14,7 @@
 }
 
 .poke-button {
-    @apply bg-blue-700 border-4 border-yellow-500 text-yellow-300 font-bold p-4 text-lg font-mono rounded-lg hover:bg-blue-800;
+    @apply bg-blue-700 text-center border-4 border-yellow-500 text-yellow-300 font-bold p-4 text-lg font-mono rounded-lg hover:bg-blue-800;
 }
 
 @media (max-width: 1024px) {
@@ -25,9 +25,48 @@
 
 @media (max-width: 640px) {
     .poke-button {
-        @apply text-sm p-2;
+        @apply text-xs p-2;
     }
 }
+
+.button-panel-button {
+    @apply flex min-w-[10%] text-center disabled:bg-gray-700 disabled:text-gray-200 mt-[10%]
+}
+
+/* Views */
+.game-view {
+    @apply flex flex-col min-h-full gap-16 w-full max-h-full
+}
+
+@media (max-width: 1024px) {
+    .game-view {
+        @apply gap-8;
+    }
+}
+
+@media (max-width: 640px) {
+    .game-view {
+        @apply gap-4;
+    }
+}
+
+/* Components */
+.button-panel {
+    @apply flex flex-row justify-around
+}
+
+@media (max-width: 1024px) {
+    .button-panel {
+        @apply flex flex-col;
+    }
+}
+
+@media (max-width: 640px) {
+    .button-panel-container {
+        @apply flex flex-col;
+    }
+}
+
 
 /* Containers */
 .button-panel-container {
