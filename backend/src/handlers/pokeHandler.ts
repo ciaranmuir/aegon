@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Pokemon, PokemonRandomResponse} from "../api/types";
+import {PokemonHidden, PokemonRandomResponse, PokemonVerifyResponse} from "../api/types";
 import {createSilhouette, generateRandomExcluding} from "../utils/utils";
 import {pokeCache} from "../app";
 import {POKIAPI_URL} from "../consts";
@@ -7,7 +7,7 @@ import {POKIAPI_URL} from "../consts";
 export const getRandomPokemon = async (): Promise<PokemonRandomResponse | string> => {
     try {
         let ids: number[] = []
-        let theChosenOne: Pokemon = {id: '', silhouette: ''}
+        let theChosenOne: PokemonHidden = {id: '', silhouette: ''}
         let nameOptions: string[] = []
 
         // generate random ids to pick 4 random pokemon
@@ -18,7 +18,7 @@ export const getRandomPokemon = async (): Promise<PokemonRandomResponse | string
         // construct the chosenOne
         let chosenOne = pokeCache.get(ids[0].toString())
         if (!chosenOne) {
-            throw new Error('Pokemon not found')
+            return 'Failed to load pokemon'
         }
         theChosenOne.id = chosenOne.id
         let silhouetteBuffer= await createSilhouette(chosenOne.imgURL)
@@ -28,7 +28,7 @@ export const getRandomPokemon = async (): Promise<PokemonRandomResponse | string
         ids.map((id, index) => {
             let p = pokeCache.get(id.toString())
             if (!p) {
-                throw new Error( 'Pokemon not found')
+                return 'Failed to load pokemon'
             }
             nameOptions.push(p.name)
             return
@@ -42,13 +42,20 @@ export const getRandomPokemon = async (): Promise<PokemonRandomResponse | string
     }
 };
 
-export const verifyPokemon = async (name: string) => {
-    try {
-        const query = await axios.get(`${POKIAPI_URL}${name}`);
-        return query.status === 200;
-
-    } catch (error) {
-        console.error(error);
-        return null;
+export const verifyPokemon = (id: string, guess: string): PokemonVerifyResponse | string => {
+    let resp: PokemonVerifyResponse
+    let correctPokemon = pokeCache.get(id)
+    if (!correctPokemon) {
+        throw new Error('Pokemon not found')
     }
+
+    resp = {
+        isCorrect: guess === correctPokemon.name,
+        correctPokemon: {
+            id: correctPokemon.id,
+            name: correctPokemon.name,
+            imgURL: correctPokemon.imgURL
+        }
+    }
+    return resp
 }

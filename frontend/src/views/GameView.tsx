@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {usePokeAPI} from "../hooks/usePokeAPI";
 import ButtonPanel from "../components/ButtonPanel/ButtonPanel";
+import {queryVerifyPokemon} from "../client/queries/queries";
 const GameView = () => {
     //set up query to backend to get random pokemon
-    const { getRandomPokemon, error, loading} = usePokeAPI()
+    const { getRandomPokemon, verifyPokemon, error, loading} = usePokeAPI()
     const [pokemon, setPokemon] = useState<Pokemon | undefined>(undefined)
     const [options, setOptions] = useState<string[]>(['?', '?', '?', '?'])
     const handleSetUp = () => {
@@ -12,13 +13,21 @@ const GameView = () => {
                 setPokemon(resp.data.pokemon)
                 console.log('data', resp.data.nameOptions)
                 setOptions(resp.data.nameOptions)
+            } else if (error) {
+                console.log('error', error)
             }
-            console.log('data', resp.data)
         })
     }
 
     const handlerGuess = (guess: string) => {
-
+        console.log('guess', guess)
+        queryVerifyPokemon(pokemon?.id ?? '', guess).then((resp) => {
+            if (resp) {
+                handleSetUp()
+            } else if (error) {
+                console.log('error', error)
+            }
+        })
     }
 
     useEffect(() => {

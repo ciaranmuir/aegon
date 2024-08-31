@@ -5,5 +5,5 @@ export const queryRandomPokemon = () => {
 };
 
 export const queryVerifyPokemon = (id: string, guess: string) => {
-    return pokeClient.post(`/pokemon/verify`, {id, guess});
+    return pokeClient.post(`/verify`, {id, guess});
 }
