@@ -15,7 +15,15 @@ const ButtonPanel = (props: ButtonPanelProps) => {
         <div className={'flex flex-row justify-around'}>
             {props.options.map((option, index) => {
                 return (
-                    <button key={index} id={option} onClick={handleClick} className={'poke-button min-w-[10%] mt-[10%]'} >{option}</button>
+                    <button
+                        className={`poke-button min-w-[10%] disabled:bg-gray-700 disabled:text-gray-200 mt-[10%]`}
+                        key={index}
+                        id={option}
+                        onClick={handleClick}
+                        disabled={props.disabled}
+                    >
+                        {option}
+                    </button>
                 )
             })}
         </div>

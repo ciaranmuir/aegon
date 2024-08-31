@@ -10,9 +10,9 @@ const StartMenuView = (props: StartMenuViewProps) => {
         props.setGameStarted(true)
      }
     return (
-        <div className={'flex flex-col min-h-full max-h-full'}>
+        <div className={'flex flex-col'}>
             <img className={'mx-auto mt-[2%] poke-pulse h-[40%]'} src={"./svgs/suspense/pokeball.svg"} alt="Logo" />
-            <button className={'poke-menu-button mt-[10%]'} onClick={handleStartGame}>Start Game!</button>
+            <button className={'poke-menu-button mt-[30%]'} onClick={handleStartGame}>Start Game!</button>
         </div>
     )
 }

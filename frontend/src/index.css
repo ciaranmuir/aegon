@@ -2,7 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom CSS */
 
+#main-view {
+    @apply p-10 bg-gradient-to-br from-indigo-700 to-red-500 text-white text-center min-h-[100vh] max-h-[100vh] w-[100vw]
+}
+
+/* Buttons */
 .poke-menu-button {
     @apply bg-blue-700 border-4 border-yellow-500 text-yellow-300 font-bold p-4 text-lg font-mono rounded-lg hover:bg-blue-800;
 }
@@ -11,6 +17,36 @@
     @apply bg-blue-700 border-4 border-yellow-500 text-yellow-300 font-bold p-4 text-lg font-mono rounded-lg hover:bg-blue-800;
 }
 
+@media (max-width: 1024px) {
+    .poke-button {
+        @apply text-base p-2;
+    }
+}
+
+@media (max-width: 640px) {
+    .poke-button {
+        @apply text-sm p-2;
+    }
+}
+
+/* Containers */
+.button-panel-container {
+    @apply flex flex-col w-[60%] place-self-center;
+}
+
+@media (max-width: 1024px) {
+    .button-panel-container {
+        @apply flex flex-col w-[80%] place-self-center;
+    }
+}
+
+@media (max-width: 640px) {
+    .button-panel-container {
+        @apply flex flex-col w-full place-self-center;
+    }
+}
+
+/* Animations */
 .poke-pulse {
     animation: pulseBrightness 3s infinite ease-in-out;
 }

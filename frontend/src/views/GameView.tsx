@@ -35,9 +35,20 @@ const GameView = () => {
     },[])
 
     return (
-        <div className={'flex flex-col min-h-full w-full max-h-full'}>
-            <img className={'mx-auto mt-[2%] h-60'} src={pokemon ? pokemon.silhouette : "./svgs/suspense/gaming.svg"} alt="Logo" />
-            <ButtonPanel options={options} onClick={handlerGuess} disabled={loading}/>
+        <div className={'flex flex-col min-h-full gap-16 w-full max-h-full'}>
+            {
+                loading ?
+                    <div className={'flex flex-row justify-center'}>
+                        <img className={'mx-auto poke-pulse mt-[2%] h-60'} src={"./svgs/suspense/pokeball.svg"} alt="Logo" />
+                    </div>
+                    :
+                    <div className={'flex flex-row justify-center'}>
+                        <img className={'mx-auto mt-[2%] h-60'} src={pokemon ? pokemon.silhouette : "./svgs/suspense/gaming.svg"} alt="Logo" />
+                    </div>
+            }
+            <div className={'button-panel-container'} >
+                <ButtonPanel options={options} onClick={handlerGuess} disabled={loading}/>
+            </div>
         </div>
     )
 }
