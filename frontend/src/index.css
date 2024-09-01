@@ -73,7 +73,7 @@ p {
 
 /* Buttons */
 .poke-button {
-    @apply bg-blue-700 text-center border-4 border-yellow-500 text-yellow-300 font-bold p-4 text-lg font-mono rounded-lg hover:bg-blue-800;
+    @apply bg-blue-700 text-center border-4 border-yellow-500 text-yellow-300 font-bold p-4 text-lg font-mono rounded-lg hover:bg-blue-800 disabled:bg-gray-500 disabled:cursor-not-allowed;
 }
 
 @media (max-width: 1024px) {
@@ -166,12 +166,63 @@ p {
 }
 
 /* Animations */
+
+.score-flash-correct {
+    @apply text-white animate-flash-correct;
+}
+
+.score-flash-incorrect {
+    @apply text-red-500 animate-flash-incorrect;
+}
+
 .poke-pulse {
     animation: pulseBrightness 3s infinite ease-in-out;
 }
 
 .poke-reveal {
     animation: reveal 300ms ease-in-out;
+}
+
+.animate-spin {
+    animation: spin 700ms linear infinite;
+}
+
+.animate-flash-correct {
+    animation: flash-bg-correct 200ms infinite;
+}
+
+.animate-flash-incorrect {
+    animation: flash-bg-incorrect 200ms infinite;
+}
+
+@keyframes flash-bg-correct {
+    0% {
+        background-color: rgba(24, 186, 65, 0.5);
+        opacity: 0.5;
+    }
+    50% {
+        background-color: rgba(24, 186, 65, 0.8);
+        opacity: 1.0;
+    }
+    100% {
+        background-color: rgba(24, 186, 65, 0.5);
+        opacity: 0.5;
+    }
+}
+
+@keyframes flash-bg-incorrect {
+    0% {
+        background-color: rgba(227, 20, 58, 0.5);
+        opacity: 0.5;
+    }
+    50% {
+        background-color: rgba(227, 20, 58, 0.8);
+        opacity: 1.0;
+    }
+    100% {
+        background-color: rgba(227, 20, 58, 0.5);
+        opacity: 0.5;
+    }
 }
 
 @keyframes pulseBrightness {
@@ -202,8 +253,4 @@ p {
     100% {
         transform: rotate(360deg);
     }
-}
-
-.animate-spin {
-    animation: spin 700ms linear infinite;
 }

@@ -4,6 +4,7 @@ import ButtonPanel from "../components/ButtonPanel/ButtonPanel";
 import {queryVerifyPokemon} from "../client/queries/queries";
 import {UserScore} from "../index";
 import {pokeloadingImg} from "../consts";
+import GameButtonPanel from "../components/ButtonPanel/GameButtonPanel";
 
 interface GameViewProps {
     score: UserScore
@@ -16,6 +17,7 @@ const GameView = (props: GameViewProps) => {
     const [pokemonHidden, setPokemonHidden] = useState<PokemonHidden | undefined>(undefined)
     const [options, setOptions] = useState<string[]>(['?', '?', '?', '?'])
     const [pokemonRevealed, setPokemonRevealed] = useState<PokemonReveal | undefined>(undefined)
+    const [disabled, setDisabled] = useState<boolean>(false)
 
     // handleSetUp queries the backend to get a new pokemon and set the options
     const handleSetUp = useCallback( () => {
@@ -31,6 +33,7 @@ const GameView = (props: GameViewProps) => {
 
     // handlerGuess queries the backend to verify the guess
     const handlerGuess = useCallback((guess: string) => {
+        setDisabled(true)
         queryVerifyPokemon(pokemonHidden?.id ?? '', guess).then((resp) => {
             // cannot work out why resp is being double wrapped in data obj
             if (resp.data.data) {
@@ -45,6 +48,7 @@ const GameView = (props: GameViewProps) => {
                     setPokemonRevealed(undefined)
                     setPokemonHidden(undefined)
                     setOptions(['?', '?', '?', '?'])
+                    setDisabled(false)
                     handleSetUp()
                 }, 2000)
             } else if (error) {
@@ -77,7 +81,7 @@ const GameView = (props: GameViewProps) => {
             {
                 !loading && pokemonHidden &&
                 <div className={'button-panel-container'} >
-                    <ButtonPanel options={options} onClick={handlerGuess} disabled={loading}/>
+                    <ButtonPanel options={options} onClick={handlerGuess} disabled={disabled}/>
                 </div>
             }
         </div>
