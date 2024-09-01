@@ -3,7 +3,7 @@ import {POKIAPI_URL} from "../consts";
 import axios from "axios";
 import sharp from "sharp";
 
-export async function fetchPokemon(pokeCache: Map<string, DBPokemon>): Promise<any> {
+export async function fetchPokemon(pokeCache: Map<string, DBPokemon>): Promise<string | undefined> {
     const maxPokemon = 50
     try {
         for (let i = 1; i <= maxPokemon; i++) {
@@ -15,8 +15,9 @@ export async function fetchPokemon(pokeCache: Map<string, DBPokemon>): Promise<a
                 imgURL: pokemon.sprites.front_default
             })
         }
+        return undefined
     } catch (error) {
-        console.log(error)
+        return error as string
     }
 }
 

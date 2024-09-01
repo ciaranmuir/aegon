@@ -12,15 +12,16 @@ export const getRandomPokemon = async (): Promise<PokemonRandomResponse | string
 
         // generate random ids to pick 4 random pokemon
         for (let i = 0; i <= 3; i++ ) {
-            ids.push( generateRandomExcluding(1, 50, ids))
+            ids.push( generateRandomExcluding(1, pokeCache.size, ids))
         }
 
         // construct the chosenOne
         let chosenOne = pokeCache.get(ids[0].toString())
         if (!chosenOne) {
-            return 'Failed to load pokemon'
+            return 'failed to load pokemon from cache'
         }
         theChosenOne.id = chosenOne.id
+
         let silhouetteBuffer= await createSilhouette(chosenOne.imgURL)
         theChosenOne.silhouette = `data:image/png;base64,${silhouetteBuffer.toString('base64')}`
 
@@ -28,7 +29,7 @@ export const getRandomPokemon = async (): Promise<PokemonRandomResponse | string
         ids.map((id, index) => {
             let p = pokeCache.get(id.toString())
             if (!p) {
-                return 'Failed to load pokemon'
+                return 'failed to load pokemon from cache'
             }
             nameOptions.push(p.name)
             return
@@ -38,6 +39,7 @@ export const getRandomPokemon = async (): Promise<PokemonRandomResponse | string
             pokemon: theChosenOne,
             nameOptions: nameOptions }
     } catch (error) {
+        console.log('error in getRandomPokemon')
         return (error as Error).message;
     }
 };

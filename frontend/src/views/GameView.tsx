@@ -37,7 +37,6 @@ const GameView = (props: GameViewProps) => {
         queryVerifyPokemon(pokemonHidden?.id ?? '', guess).then((resp) => {
             // cannot work out why resp is being double wrapped in data obj
             if (resp.data.data) {
-                console.log('resp', resp.data)
                 setPokemonRevealed(resp.data.data.correctPokemon)
                 if (resp.data.data.isCorrect) {
                     props.setScore({...props.score, correct: props.score.correct + 1})
