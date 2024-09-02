@@ -8,7 +8,7 @@ export const getRandomPokemon = async (): Promise<PokemonRandomResponse | string
     try {
         let ids: number[] = []
         let theChosenOne: PokemonHidden = {id: '', silhouette: ''}
-        let nameOptions: string[] = []
+        let nameOptions: string[] = ['', '', '', '']
 
         // generate random ids to pick 4 random pokemon
         for (let i = 0; i <= 3; i++ ) {
@@ -26,12 +26,17 @@ export const getRandomPokemon = async (): Promise<PokemonRandomResponse | string
         theChosenOne.silhouette = `data:image/png;base64,${silhouetteBuffer.toString('base64')}`
 
         // get the pokemon from the cache add name options
+        let shuffledIndexes: number[] = []
         ids.map((id, index) => {
             let p = pokeCache.get(id.toString())
             if (!p) {
                 return 'failed to load pokemon from cache'
             }
-            nameOptions.push(p.name)
+
+            // add the correct name to the nameOptions in random order
+            let rndIndex = generateRandomExcluding(0, ids.length-1, shuffledIndexes)
+            nameOptions[rndIndex] = p.name
+            shuffledIndexes.push(rndIndex)
             return
         })
 
