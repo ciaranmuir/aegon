@@ -59,6 +59,7 @@ npm install
 ```bash
 npm run dev
 ```
+This will start a development server on `http://localhost:3000/`.
 
 #### 4. To build for production
 ```bash
