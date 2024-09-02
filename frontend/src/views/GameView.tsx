@@ -4,8 +4,6 @@ import ButtonPanel from "../components/ButtonPanel/ButtonPanel";
 import {queryVerifyPokemon} from "../client/queries/queries";
 import {UserScore} from "../index";
 import {pokeloadingImg} from "../consts";
-import GameButtonPanel from "../components/ButtonPanel/GameButtonPanel";
-
 interface GameViewProps {
     score: UserScore
     setScore: Dispatch<SetStateAction<UserScore>>

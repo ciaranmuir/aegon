@@ -1,4 +1,7 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/index.tsx',
@@ -18,14 +21,30 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
             },
             {
                 test: /\.(png|jp(e*)g|svg|gif)$/,
                 type: "asset/resource",
+                generator: {
+                    filename: 'images/[name][ext]',
+                },
             }
         ],
     },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+        }),
+        new HtmlWebpackPlugin({
+            template: './public/index.html',
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'public/imgs', to: 'imgs' },
+            ],
+        }),
+    ],
     devServer: {
         static: {
             directory: path.join(__dirname, 'public'),
