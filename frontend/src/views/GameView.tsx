@@ -32,10 +32,10 @@ const GameView = (props: GameViewProps) => {
     // handlerGuess queries the backend to verify the guess
     const handlerGuess = useCallback((guess: string) => {
         setDisabled(true)
-        verifyPokemon(pokemonHidden?.id ?? '', guess).then((resp) => {
-            if (resp.data) {
-                setPokemonRevealed(resp.data.correctPokemon)
-                if (resp.data.isCorrect) {
+        queryVerifyPokemon(pokemonHidden?.id ?? '', guess).then((resp) => {
+            if (resp.data.data) {
+                setPokemonRevealed(resp.data.data.correctPokemon)
+                if (resp.data.data.isCorrect) {
                     props.setScore({...props.score, correct: props.score.correct + 1})
                 } else {
                     props.setScore({...props.score, incorrect: props.score.incorrect + 1})
