@@ -11,31 +11,6 @@ npm -v
 
 If you do not have Node.js installed, you can download it from the [official website](https://nodejs.org/).
 
-## Frontend Setup
-
-To set up the frontend, navigate to the `frontend` directory and run the following commands:
-
-#### 1. Navigate to the frontend directory
-```bash
-cd frontend
-```
-#### 2. Install the dependencies
-```bash
-npm install
-```
-#### 3. To build for production
-```bash
-npm run build
-```
-This will create populate a `dist` directory in the `frontend` folder with the bundled js application.
-
-#### 4. To run the development server
-```bash
-npm start
-```
-
-This will start a development server on `http://localhost:9000/` and open the application in your default browser.
-
 ## Backend Setup
 
 To set up the backend, navigate to the `backend` directory and run the following commands:
@@ -72,3 +47,30 @@ npm start
 ```
 
 This will start a development server on `http://localhost:3000/`.
+
+
+## Frontend Setup
+
+To set up the frontend, navigate to the `frontend` directory and run the following commands:
+
+#### 1. Navigate to the frontend directory
+```bash
+cd frontend
+```
+#### 2. Install the dependencies
+```bash
+npm install
+```
+#### 3. To build for production
+```bash
+npm run build
+```
+This will create populate a `dist` directory in the `frontend` folder with the bundled js application.
+
+#### 4. To run the development server
+```bash
+npm start
+```
+
+This will start a development server on `http://localhost:9000/` and open the application in your default browser.
+
