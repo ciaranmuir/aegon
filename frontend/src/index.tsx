@@ -5,9 +5,10 @@ import axios from "axios";
 import GameView from "./views/GameView";
 import StartMenuView from "./views/StartMenuView";
 import Header from "./components/Headers/Header";
+import {serverURL} from "./consts";
 
 export const pokeClient = axios.create({
-    baseURL: 'http://localhost:3000/api/pokemon/',
+    baseURL: serverURL,
     timeout: 1000,
 })
 export interface UserScore {
